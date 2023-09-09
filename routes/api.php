@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SearchLocationController;
+use App\Http\Controllers\SearchWeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/get-gps-coordinate', [SearchLocationController::class, 'getGpsCoordinate']);
+Route::post('/get-forecast', [SearchWeatherController::class, 'getForecast']);

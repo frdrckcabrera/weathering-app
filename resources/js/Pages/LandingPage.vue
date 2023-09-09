@@ -1,14 +1,97 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import { onMounted, ref } from 'vue';
+import SearchLocation from '../Components/SearchLocation.vue';
+
+const displayForecast = ref({
+    main: {
+        temp: 0
+    },
+    name: 'Manila',
+    sys: {
+        country: 'PH'
+    },
+    wind: {
+        deg: '',
+        gust: '',
+        speed: ''
+    },
+    weather: [{
+        main: '',
+        description: ''
+    }],
+    clouds: {
+        all: ''
+    }
+});
+
+const fetchIcons = (iconId, iconName) => {
+    let skycons = new Skycons({ 'monochrome': false });
+    skycons.add(iconId, iconName);
+    skycons.play();
+}
+
+const setForecast = (response) => {
+    displayForecast.value = response;
+    fetchIcons('mainIcon', response.skycons);
+}
+
+onMounted(() => {
+    fetchIcons('mainIcon', 'clear-day');
+    fetchIcons('windIcon', 'wind');
+    fetchIcons('sunriseIcon', 'clear-day');
+    fetchIcons('sunsetIcon', 'clear-night');
+    fetchIcons('cloudIcon', 'cloudy');
+})
 </script>
 
 <template>
-    <Head title="Dashboard" />
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">You're logged in!</div>
+    <Head title="Weathering with You" />
+    <div class="flex flex-col items-center justify-center w-screen min-h-screen text-gray-700 p-10 bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-200 ">
+    <!-- Component Start -->
+    <SearchLocation @get-forecast="setForecast"></SearchLocation>
+    <div class="w-full max-w-screen-sm bg-white p-10 mt-10 rounded-xl ring-8 ring-white ring-opacity-40">
+        <div class="flex justify-between ml-5 mr-5">
+            <div class="flex flex-col">
+                <span class="text-6xl font-bold">{{ parseInt(displayForecast.main.temp) }}°C</span>
+                <span class="text-lg font-semibold mt-1 text-gray-500">
+                    {{ displayForecast.name }}, {{ displayForecast.sys.country }}
+                </span>
+                <span class="text-xs text-gray-400">
+                    Feels like {{ parseInt(displayForecast.main.feels_like) }}°C. {{ displayForecast.weather[0].main }}, {{ displayForecast.weather[0].description }}
+                </span>
+                <span class="text-xs text-gray-400">
+                    Humidity: {{ displayForecast.main.humidity }}% Visibility: {{ displayForecast.visibility / 1000 }}km
+                </span>
+            </div>
+            <canvas id="mainIcon" width="128" height="128"></canvas>
+        </div>
+        <div class="flex justify-between mt-12">
+            <div class="flex flex-col items-center">
+                <span class="font-semibold text-md">Sunrise</span>
+                <canvas id="sunriseIcon" width="32" height="32"></canvas>
+                <span class="text-xs text-gray-400">{{ displayForecast.sys.sunrise }}</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="font-semibold text-md">Sunset</span>
+                <canvas id="sunsetIcon" width="32" height="32"></canvas>
+                <span class="text-xs text-gray-400">{{ displayForecast.sys.sunset }}</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="font-semibold text-md">Clouds</span>
+                <canvas id="cloudIcon" width="32" height="32"></canvas>
+                <span class="text-xs text-gray-400">{{ displayForecast.clouds.all }} %</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="font-semibold text-md">Wind</span>
+                <canvas id="windIcon" width="32" height="32"></canvas>
+                <span class="text-xs text-gray-400">Degree: {{ displayForecast.wind.deg }} </span>
+                <span class="text-xs text-gray-400">Speed: {{ displayForecast.wind.speed }} </span>
+                <span class="text-xs text-gray-400">Gust: {{ displayForecast.wind.gust }} </span>
             </div>
         </div>
+    </div>
+<!-- Component End  -->
+
     </div>
 </template>

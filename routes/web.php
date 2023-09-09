@@ -13,11 +13,6 @@ use Inertia\Inertia;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/inertia', function () {
     return Inertia::render('LandingPage');
 });
