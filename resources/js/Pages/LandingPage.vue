@@ -7,9 +7,9 @@ const displayForecast = ref({
     main: {
         temp: 0
     },
-    name: 'Manila',
+    name: 'Tokyo',
     sys: {
-        country: 'PH'
+        country: 'JP'
     },
     wind: {
         deg: '',

@@ -4,10 +4,10 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const selectedCountry = ref({
-    code: 'Manila, National Capital Region',
-    name: 'Manila, National Capital Region',
-    latitude: '14.6042',
-    longitude: '120.9822'
+    code: 'Tokyo, Tōkyō, Japan',
+    name: 'Tokyo, Tōkyō, Japan',
+    latitude: '35.6895',
+    longitude: '139.6917'
 });
 const countries = ref([]);
 
@@ -24,11 +24,12 @@ const searchWeather = (selected, id) => {
     axios.post(`/api/get-forecast?lat=${selected.latitude}&lon=${selected.longitude}&units=metric`)
     .then(response => {
         emit('getForecast', response.data);
+        console.log(response.data);
     });
 };
 
 onMounted(() => {
-    axios.post('/api/get-forecast?lat=14.6042&lon=120.9822&units=metric')
+    axios.post('/api/get-forecast?lat=35.6895&lon=139.6917&units=metric')
     .then(response => {
         emit('getForecast', response.data);
     });

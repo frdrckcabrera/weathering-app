@@ -50,28 +50,34 @@ class SearchWeatherController extends Controller
 
     public function getForecast(Request $request)
     {
-        $endpoint = config('weather.open_weather.url');
-        $token = config('weather.open_weather.token');
-        $lat = $request->input('lat') ?? null;
-        $lon = $request->input('lon') ?? null;
-        $units = $request->input('units') ?? null;
-        $weatherForecast = "{$endpoint}weather?lat={$lat}&lon={$lon}&appid={$token}&units={$units}";
-        $headers = ['headers' => ['accept' => 'application/json']];
-        $client = new Client();
-        $weatherResponse = $client->get($weatherForecast, $headers);
-        $forecasts = json_decode($weatherResponse->getBody());
-        $openWeatherIcon = collect($forecasts->weather)->first()->icon;
-        $skyCons = config("weather.icon_mapping.{$openWeatherIcon}");
-        $forecasts->skycons = $skyCons;
-        $forecasts->sys->sunrise = now()
-            ->createFromTimestamp($forecasts->sys->sunrise)
-            ->format('g:i A');
-        $forecasts->sys->sunset = now()
-            ->createFromTimestamp($forecasts->sys->sunset)
-            ->format('g:i A');
-        $convert1h = '1h';
-        $forecasts->rain_per_hr = $forecasts->rain->$convert1h ?? 0;
+        try {
+            $endpoint = config('weather.open_weather.url');
+            $token = config('weather.open_weather.token');
+            $lat = $request->input('lat') ?? null;
+            $lon = $request->input('lon') ?? null;
+            $units = $request->input('units') ?? null;
+            $weatherForecast = "{$endpoint}weather?lat={$lat}&lon={$lon}&appid={$token}&units={$units}";
+            $headers = ['headers' => ['accept' => 'application/json']];
+            $client = new Client();
+            $weatherResponse = $client->get($weatherForecast, $headers);
+            $forecasts = json_decode($weatherResponse->getBody());
+            $openWeatherIcon = collect($forecasts->weather)->first()->icon;
+            $skyCons = config("weather.icon_mapping.{$openWeatherIcon}");
+            $forecasts->skycons = $skyCons;
+            $forecasts->sys->sunrise = now()
+                ->createFromTimestamp($forecasts->sys->sunrise)
+                ->format('g:i A');
+            $forecasts->sys->sunset = now()
+                ->createFromTimestamp($forecasts->sys->sunset)
+                ->format('g:i A');
+            $convert1h = '1h';
+            $forecasts->rain_per_hr = $forecasts->rain->$convert1h ?? 0;
+    
+            return $forecasts ?? [];
+        } catch (\Throwable $error) {
+            logger()->error($error);
 
-        return $forecasts ?? [];
+            return [];
+        }
     }
 }

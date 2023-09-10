@@ -49,27 +49,33 @@ class SearchLocationController extends Controller
 
     public function getGpsCoordinate(Request $request)
     {
-        $keyword = $request->input('keyword') ?? 'Manila';
-        $url = config("weather.four_square.url") . "?query={$keyword}&types=geo&limit=5";
-        $headers = [
-            'headers' => [
-                'Authorization' => config("weather.four_square.token"),
-                'accept' => 'application/json',
-            ]
-        ];
-        $client = new Client();
-        $response = $client->get($url, $headers);
-        $data = json_decode($response->getBody());
-        $countries = collect($data->results)->map(function ($row) {
-            return [
-                "code" => $row->geo->name,
-                "name" => $row->geo->name,
-                "latitude" => $row->geo->center->latitude,
-                "longitude" => $row->geo->center->longitude,
+        try {
+            $keyword = $request->input('keyword') ?? 'Tokyo';
+            $url = config("weather.four_square.url") . "?query={$keyword}&types=geo&limit=5";
+            $headers = [
+                'headers' => [
+                    'Authorization' => config("weather.four_square.token"),
+                    'accept' => 'application/json',
+                ]
             ];
-        })
-        ->values();
+            $client = new Client();
+            $response = $client->get($url, $headers);
+            $data = json_decode($response->getBody());
+            $countries = collect($data->results)->map(function ($row) {
+                return [
+                    "code" => $row->geo->name,
+                    "name" => $row->geo->name,
+                    "latitude" => $row->geo->center->latitude,
+                    "longitude" => $row->geo->center->longitude,
+                ];
+            })
+            ->values();
+    
+            return $countries ?? [];
+        } catch (\Throwable $error) {
+            logger()->error($error);
 
-        return $countries ?? [];
+            return [];
+        }
     }
 }
