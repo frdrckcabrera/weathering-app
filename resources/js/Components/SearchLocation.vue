@@ -24,7 +24,6 @@ const searchWeather = (selected, id) => {
     axios.post(`/api/get-forecast?lat=${selected.latitude}&lon=${selected.longitude}&units=metric`)
     .then(response => {
         emit('getForecast', response.data);
-        console.log(response.data);
     });
 };
 
