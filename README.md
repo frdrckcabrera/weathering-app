@@ -46,7 +46,7 @@ cd weathering-app
 ```
 cp .env.example .env
 ```
-3. Update the .env file with your desired configuration, including database settings and other environment variables if needed.
+3. Update the .env file with your valid token from OpenWeather and FourSquare APIs.
 
 4. Set alias for Sail
 ```
