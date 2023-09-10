@@ -33,6 +33,24 @@ Frontend Flexibility: Inertia.js allows you to use modern frontend frameworks li
 
 In conclusion, the combination of Inertia.js and Laravel provides a powerful, efficient, and developer-friendly stack for building weather applications. It offers the necessary tools and features to deliver real-time weather data, ensure security, and scale your application to meet user demand while maintaining excellent performance. This stack has proven itself in various web development scenarios and is well-suited for the challenges presented by weather applications.
 
+## Laravel 10, Inertia.js, and Vue.js Dockerized Project
+
+This repository contains a Dockerized setup for a Laravel 10 application using Inertia.js for frontend interactions and Vue.js for dynamic components. Docker allows you to easily set up the development environment with all dependencies, making it a breeze to get started with the project.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Getting Started
+
+```
+git clone https://github.com/your-username/laravel-inertia-vue-docker.git
+cd laravel-inertia-vue-docker
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -89,4 +107,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and available under the [MIT license](https://opensource.org/licenses/MIT).
