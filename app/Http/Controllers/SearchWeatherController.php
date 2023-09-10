@@ -62,6 +62,7 @@ class SearchWeatherController extends Controller
             $weatherResponse = $client->get($weatherForecast, $headers);
             $forecasts = json_decode($weatherResponse->getBody());
             $openWeatherIcon = collect($forecasts->weather)->first()->icon;
+            $forecasts->weather[0]->description = ucwords($forecasts->weather[0]->description);
             $skyCons = config("weather.icon_mapping.{$openWeatherIcon}");
             $forecasts->skycons = $skyCons;
             $forecasts->sys->sunrise = now()

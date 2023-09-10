@@ -60,7 +60,7 @@ onMounted(() => {
                     {{ displayForecast.name }}, {{ displayForecast.sys.country }}
                 </span>
                 <span class="text-xs text-gray-400">
-                    Feels like {{ parseInt(displayForecast.main.feels_like) }}°C. {{ displayForecast.weather[0].main }}, {{ displayForecast.weather[0].description }}
+                    Feels like {{ parseInt(displayForecast.main.feels_like) }}°C. {{ displayForecast.weather[0].description }}
                 </span>
                 <span class="text-xs text-gray-400">
                     Humidity: {{ displayForecast.main.humidity }}% Visibility: {{ displayForecast.visibility / 1000 }}km
