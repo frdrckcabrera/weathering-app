@@ -1,7 +1,3 @@
-<p align="center">
-    <img src="https://drive.google.com/file/d/1gZ8NJdrksgNsPpqTPVv22ZD8dl8gl1f-/view?usp=sharing" width="400" alt="Weathering-App">
-</p>
-
 ## UI and UX Explanation
 
 Inertia.js and Laravel form an exceptional stack for developing weather applications due to their combined strengths in various aspects of web development. Let's explore why this stack is considered one of the best choices for building weather applications:
