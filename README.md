@@ -42,38 +42,43 @@ Before you begin, ensure you have the following installed:
 git clone https://git@github.com:frdrckcabrera/weathering-app.git
 cd weathering-app
 ```
+2. Create a copy of the .env.example file and name it .env:
+```
+cp .env.example .env
+```
+3. Update the .env file with your desired configuration, including database settings and other environment variables if needed.
 
-2. Set alias for Sail
+4. Set alias for Sail
 ```
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 ```
 
-3. Build and start the Docker containers:
+5. Build and start the Docker containers:
 ```
 sail up
 ```
 
-4. Install PHP dependencies using Composer:
+6. Install PHP dependencies using Composer:
 ```
 sail composer install
 ```
 
-5. Generate an application key:
+7. Generate an application key:
 ```
 sail php artisan key:generate
 ```
 
-6. Install JavaScript dependencies using npm (or yarn if preferred):
+8. Install JavaScript dependencies using npm (or yarn if preferred):
 ```
 sail npm install
 ```
 
-7. Build the assets
+9. Build the assets
 ```
 sail npm run build
 ```
 
-8. Access the application in your web browser:
+10. Access the application in your web browser:
 - [Laravel](http://localhost)
 
 ### Development
