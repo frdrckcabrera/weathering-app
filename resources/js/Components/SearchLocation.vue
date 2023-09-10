@@ -45,8 +45,8 @@ onMounted(() => {
                 v-model="selectedCountry"
                 :searchable="true"
                 :options="countries"
-                @search-change="searchLocation"
                 @select="searchWeather"
+                @search-change="searchLocation"
             ></Multiselect>
         </div>
     </div>

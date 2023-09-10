@@ -22,7 +22,8 @@ const displayForecast = ref({
     }],
     clouds: {
         all: ''
-    }
+    },
+    rain_per_hr: 0
 });
 
 const fetchIcons = (iconId, iconName) => {
@@ -42,12 +43,13 @@ onMounted(() => {
     fetchIcons('sunriseIcon', 'clear-day');
     fetchIcons('sunsetIcon', 'clear-night');
     fetchIcons('cloudIcon', 'cloudy');
+    fetchIcons('rainIcon', 'rain');
 })
 </script>
 
 <template>
-    <Head title="Weathering with You" />
-    <div class="flex flex-col items-center justify-center w-screen min-h-screen text-gray-700 p-10 bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-200 ">
+    <Head title="Weathering App" />
+    <div class="flex flex-col items-center justify-center w-screen min-h-screen text-gray-700 p-10 bg-gradient-to-br from-yellow-200 via-orange-200 to-red-400">
     <!-- Component Start -->
     <SearchLocation @get-forecast="setForecast"></SearchLocation>
     <div class="w-full max-w-screen-sm bg-white p-10 mt-10 rounded-xl ring-8 ring-white ring-opacity-40">
@@ -81,6 +83,11 @@ onMounted(() => {
                 <span class="font-semibold text-md">Clouds</span>
                 <canvas id="cloudIcon" width="32" height="32"></canvas>
                 <span class="text-xs text-gray-400">{{ displayForecast.clouds.all }} %</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="font-semibold text-md">Rain</span>
+                <canvas id="rainIcon" width="32" height="32"></canvas>
+                <span class="text-xs text-gray-400">{{ displayForecast.rain_per_hr }}mm</span>
             </div>
             <div class="flex flex-col items-center">
                 <span class="font-semibold text-md">Wind</span>

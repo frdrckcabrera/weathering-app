@@ -69,6 +69,8 @@ class SearchWeatherController extends Controller
         $forecasts->sys->sunset = now()
             ->createFromTimestamp($forecasts->sys->sunset)
             ->format('g:i A');
+        $convert1h = '1h';
+        $forecasts->rain_per_hr = $forecasts->rain->$convert1h ?? 0;
 
         return $forecasts ?? [];
     }
