@@ -73,7 +73,7 @@ sail npm install
 sail npm run build
 ```
 
-10. Access the application in your web browser:
+8. Access the application in your web browser:
 - [Laravel](http://localhost)
 
 ### Development
