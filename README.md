@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://drive.google.com/file/d/1gZ8NJdrksgNsPpqTPVv22ZD8dl8gl1f-/view?usp=drive_link" width="400" alt="Weathering-App">
+    <img src="https://drive.google.com/file/d/1gZ8NJdrksgNsPpqTPVv22ZD8dl8gl1f-/view" width="400" alt="Weathering-App">
 </p>
 
 ## UI and UX Explanation
