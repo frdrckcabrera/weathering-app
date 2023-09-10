@@ -59,10 +59,10 @@ onMounted(() => {
                 <span class="text-lg font-semibold mt-1 text-gray-500">
                     {{ displayForecast.name }}, {{ displayForecast.sys.country }}
                 </span>
-                <span class="text-xs text-gray-400">
+                <span class="text-sm text-gray-400">
                     Feels like {{ parseInt(displayForecast.main.feels_like) }}°C. {{ displayForecast.weather[0].description }}
                 </span>
-                <span class="text-xs text-gray-400">
+                <span class="text-sm text-gray-400">
                     Humidity: {{ displayForecast.main.humidity }}% Visibility: {{ displayForecast.visibility / 1000 }}km
                 </span>
             </div>
@@ -94,7 +94,7 @@ onMounted(() => {
                 <canvas id="windIcon" width="32" height="32"></canvas>
                 <span class="text-xs text-gray-400">Degree: {{ displayForecast.wind.deg }} </span>
                 <span class="text-xs text-gray-400">Speed: {{ displayForecast.wind.speed }} </span>
-                <span class="text-xs text-gray-400">Gust: {{ displayForecast.wind.gust }} </span>
+                <span class="text-xs text-gray-400">Gust: {{ displayForecast.wind.gust || 'N/A' }} </span>
             </div>
         </div>
     </div>
